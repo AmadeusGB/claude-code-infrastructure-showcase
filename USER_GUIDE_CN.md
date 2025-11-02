@@ -177,12 +177,122 @@ cp .claude/agents/code-architecture-reviewer.md ~/my-project/.claude/agents/
 # 其他常用代理：
 # cp .claude/agents/refactor-planner.md ~/my-project/.claude/agents/
 # cp .claude/agents/frontend-error-fixer.md ~/my-project/.claude/agents/
+# cp .claude/agents/documentation-architect.md ~/my-project/.claude/agents/
 ```
 
-**如何使用代理：**
-在 Claude Code 对话中，使用 Task 工具，指定：
-- `subagent_type`: "code-architecture-reviewer"（或你复制的代理名称）
-- `prompt`: 描述你想要完成的任务
+### 如何使用代理
+
+代理通过 **Task 工具**调用。在 Claude Code 对话中，你只需要**描述任务**，Claude 会自动选择合适的代理并启动它。
+
+### 示例 1：代码架构审查
+
+**场景：**你刚实现了一个新的 API 端点，想要确保它遵循项目规范
+
+**你的对话：**
+```
+你：我刚添加了一个新的用户状态管理端点到用户服务，帮我审查一下是否符合项目架构
+```
+
+**Claude 的反应：**
+```
+我将使用 code-architecture-reviewer 代理来审查你的新端点实现。
+
+[Claude 启动代理，代理会：]
+1. 检查代码是否遵循 BaseController 模式
+2. 验证是否包含 Zod 验证
+3. 确认 Sentry 错误处理是否正确集成
+4. 检查是否遵循分层架构
+5. 评估系统集成点
+
+[代理完成审查后返回报告]
+```
+
+**或者直接指定代理：**
+```
+你：使用 code-architecture-reviewer 审查我的 UserController 代码
+```
+
+### 示例 2：前端错误修复
+
+**场景：**React 组件在浏览器中报错
+
+**你的对话：**
+```
+你：我的 PaymentForm 组件在点击提交按钮时出现 "Cannot read property of undefined" 错误
+```
+
+**Claude 的反应：**
+```
+我将使用 frontend-error-fixer 代理来诊断和修复这个运行时错误。
+
+[代理会：]
+1. 使用浏览器工具检查控制台错误
+2. 分析组件代码找出问题
+3. 修复错误并验证
+```
+
+**或者明确指定：**
+```
+你：使用 frontend-error-fixer 修复这个 React 组件错误
+```
+
+### 示例 3：代码重构规划
+
+**场景：**需要重构一个大型服务类
+
+**你的对话：**
+```
+你：我的 UserService 有 800 行代码，太长了，帮我制定一个重构计划
+```
+
+**Claude 的反应：**
+```
+我将使用 refactor-planner 代理为你的 UserService 创建一个全面的重构策略。
+
+[代理会分析并返回：]
+- 当前代码结构分析
+- 重构建议（如何拆分）
+- 重构步骤和执行顺序
+- 风险评估和缓解策略
+- 测试策略
+```
+
+### 示例 4：文档生成
+
+**场景：**需要为新功能创建文档
+
+**你的对话：**
+```
+你：我刚完成了支付集成功能，帮我生成完整的 API 文档
+```
+
+**Claude 的反应：**
+```
+我将使用 documentation-architect 代理为你生成全面的文档。
+
+[代理会创建：]
+- API 端点文档
+- 使用示例
+- 错误处理说明
+- 集成指南
+```
+
+### 可用代理列表
+
+| 代理名称 | 用途 | 适用场景 |
+|---------|------|---------|
+| `code-architecture-reviewer` | 代码架构审查 | 实现新功能后、合并前、重构后 |
+| `frontend-error-fixer` | 前端错误修复 | 浏览器错误、React 错误、构建失败 |
+| `refactor-planner` | 重构规划 | 规划代码重组、拆分大文件 |
+| `code-refactor-master` | 执行重构 | 实际执行代码重构 |
+| `documentation-architect` | 文档生成 | 创建 API 文档、开发者指南 |
+| `plan-reviewer` | 计划审查 | 验证开发计划、识别潜在问题 |
+| `web-research-specialist` | 技术研究 | 研究解决方案、查找最佳实践 |
+| `auth-route-tester` | 认证路由测试 | 测试需要 JWT 认证的端点 |
+| `auth-route-debugger` | 认证问题调试 | 修复认证失败、token 问题 |
+| `auto-error-resolver` | 自动修复错误 | 修复 TypeScript 编译错误 |
+
+**提示：** 你只需要描述问题或任务，Claude 会智能选择合适的代理，或者你也可以明确指定使用哪个代理。
 
 ---
 
@@ -194,7 +304,12 @@ mkdir -p ~/my-project/.claude/commands
 # 开发文档命令（非常有用！）
 cp .claude/commands/dev-docs.md ~/my-project/.claude/commands/
 cp .claude/commands/dev-docs-update.md ~/my-project/.claude/commands/
+cp .claude/commands/route-research-for-testing.md ~/my-project/.claude/commands/
 ```
+
+### 命令 1：/dev-docs - 创建开发文档
+
+**用途：**为复杂任务创建结构化的开发文档，这些文档在上下文重置后依然有效。
 
 **使用方式：**
 在 Claude Code 对话中输入：
@@ -202,7 +317,161 @@ cp .claude/commands/dev-docs-update.md ~/my-project/.claude/commands/
 /dev-docs 实现用户认证系统
 ```
 
-这会创建三个文档文件，帮助你管理复杂的开发任务。
+**命令会做什么：**
+1. 分析你的需求
+2. 检查代码库相关文件
+3. 创建一个任务目录：`dev/active/实现用户认证系统/`
+4. 生成三个文档文件：
+   - `实现用户认证系统-plan.md` - 战略计划
+   - `实现用户认证系统-context.md` - 关键信息和决策
+   - `实现用户认证系统-tasks.md` - 任务清单
+
+**示例输出结构：**
+```
+dev/active/实现用户认证系统/
+├── 实现用户认证系统-plan.md      # 包含：
+│   ├── 执行摘要
+│   ├── 当前状态分析
+│   ├── 实现阶段
+│   ├── 详细任务（含验收标准）
+│   ├── 风险评估
+│   └── 时间估算
+│
+├── 实现用户认证系统-context.md   # 包含：
+│   ├── SESSION PROGRESS（当前进度）
+│   ├── 关键文件列表
+│   ├── 重要决策记录
+│   └── 快速恢复指引
+│
+└── 实现用户认证系统-tasks.md     # 包含：
+    ├── 阶段 1：基础设施 ✅
+    ├── 阶段 2：核心功能 🟡
+    └── 阶段 3：测试 ⏳
+```
+
+**实际对话示例：**
+```
+你：/dev-docs 实现支付集成功能
+
+Claude：
+📋 正在为"实现支付集成功能"创建开发文档...
+
+分析中：
+- 检查现有支付相关代码
+- 分析数据库 schema
+- 评估集成点
+
+✅ 已创建开发文档：
+📁 dev/active/实现支付集成功能/
+  ├── 实现支付集成功能-plan.md
+  ├── 实现支付集成功能-context.md
+  └── 实现支付集成功能-tasks.md
+
+文档包含：
+- 3 个实现阶段
+- 15 个详细任务
+- 风险评估和缓解策略
+- 预计时间：8-10 小时
+
+开始工作前，建议先查看 plan.md 了解整体策略。
+```
+
+**后续使用：**
+- 完成任务后，在 `tasks.md` 中打勾 ✅
+- 遇到问题或做决策时，更新 `context.md`
+- 上下文重置后，Claude 读取这些文件立即恢复工作状态
+
+---
+
+### 命令 2：/dev-docs-update - 更新开发文档
+
+**用途：**在上下文重置前，更新所有活跃任务的文档，确保下次能无缝继续。
+
+**使用时机：**
+- 接近上下文限制时
+- 准备结束对话前
+- 完成重要里程碑后
+
+**使用方式：**
+```
+/dev-docs-update
+```
+
+**命令会做什么：**
+1. 扫描 `dev/active/` 目录下的所有任务
+2. 更新每个任务的：
+   - `context.md` - 添加当前进度、新决策、问题
+   - `tasks.md` - 标记已完成的任务，添加新发现的任务
+
+**示例：**
+```
+你：/dev-docs-update
+
+Claude：
+📝 正在更新开发文档...
+
+✅ 更新完成：
+- dev/active/实现支付集成功能/context.md
+  • 添加：已完成的 PaymentController 实现
+  • 记录：决定使用 Stripe API
+  • 标记：PaymentService 进行中
+  
+- dev/active/实现支付集成功能/tasks.md
+  • ✅ 任务 1.1：创建数据库 schema（已完成）
+  • ✅ 任务 1.2：创建 PaymentController（已完成）
+  • 🟡 任务 2.1：实现 PaymentService.createPayment()（进行中）
+  • ⏳ 任务 2.2：集成 Stripe API（待开始）
+
+所有更改已保存，可以安全地进行上下文重置了。
+```
+
+---
+
+### 命令 3：/route-research-for-testing - 研究路由模式
+
+**用途：**为测试目的研究现有路由的实现模式。
+
+**使用方式：**
+```
+/route-research-for-testing 用户相关的路由
+```
+
+**示例：**
+```
+你：/route-research-for-testing 用户认证路由
+
+Claude：
+🔍 正在研究用户认证路由的实现模式...
+
+分析：
+- /api/auth/login - POST
+- /api/auth/logout - POST  
+- /api/auth/refresh - POST
+
+发现模式：
+- 所有路由使用 BaseController
+- 使用 Zod 进行验证
+- JWT cookie 认证
+- Sentry 错误追踪
+
+现在可以使用这些模式创建测试。
+```
+
+---
+
+### 为什么使用斜杠命令？
+
+**优势：**
+1. ✅ **持久化：**文档在上下文重置后依然存在
+2. ✅ **结构化：**三个文件各司其职，信息组织清晰
+3. ✅ **可恢复：**下次对话时 Claude 立即理解项目状态
+4. ✅ **可追踪：**任务清单帮你跟踪进度
+
+**推荐工作流：**
+1. 开始复杂任务 → `/dev-docs 任务名称`
+2. 开发过程中 → 更新 `context.md` 和 `tasks.md`
+3. 上下文重置前 → `/dev-docs-update`
+4. 下次继续 → Claude 自动读取文档，立即恢复工作
 
 ---
 
