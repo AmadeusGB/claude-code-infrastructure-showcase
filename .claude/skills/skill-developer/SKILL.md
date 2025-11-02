@@ -343,6 +343,14 @@ Future enhancements and ideas:
 - Skill analytics
 - Skill versioning
 
+### [USAGE_GUIDE_CN.md](USAGE_GUIDE_CN.md)
+Complete guide for using skill-developer to create skills:
+- How to activate skill-developer
+- Prompt templates for different scenarios
+- Information checklist for creating skills
+- Best practices and common mistakes
+- Real-world examples in Chinese
+
 ---
 
 ## Quick Reference Summary
