@@ -9,6 +9,27 @@ description: Create and manage Claude Code skills following Anthropic best pract
 
 Comprehensive guide for creating and managing skills in Claude Code with auto-activation system, following Anthropic's official best practices including the 500-line rule and progressive disclosure pattern.
 
+## ⚠️ IMPORTANT: Language Requirement
+
+**When creating new skills, you MUST generate SKILL.md files in CHINESE (中文).**
+
+All skill content including:
+- Headings and section titles
+- Descriptions and explanations
+- Examples and code comments
+- Best practices and guidelines
+- Error messages and tips
+
+**Should be written in Chinese**, unless:
+- Technical terms (framework names, library names) that are standard in English
+- Code examples where variable names might be in English
+- Specific technical documentation that requires English terminology
+
+**Why Chinese?**
+- Primary audience is Chinese-speaking developers
+- Easier to understand and maintain
+- Consistent with project documentation standards
+
 ## When to Use This Skill
 
 Automatically activates when you mention:
@@ -112,7 +133,28 @@ Defines:
 
 **Location:** `.claude/skills/{skill-name}/SKILL.md`
 
-**Template:**
+**⚠️ CRITICAL: All content must be in CHINESE (中文).**
+
+**Template (Chinese Version):**
+```markdown
+---
+name: my-new-skill
+description: 简要描述，包含触发此技能的关键词。提及主题、文件类型和使用场景。明确说明触发术语。
+---
+
+# 我的新技能
+
+## 目的
+说明此技能的作用
+
+## 何时使用
+具体的场景和条件
+
+## 关键信息
+实际的指导、文档、模式、示例
+```
+
+**English Template (Reference Only):**
 ```markdown
 ---
 name: my-new-skill
@@ -132,11 +174,12 @@ The actual guidance, documentation, patterns, examples
 ```
 
 **Best Practices:**
+- ✅ **Language**: **MUST use Chinese (中文)** for all content in SKILL.md
 - ✅ **Name**: Lowercase, hyphens, gerund form (verb + -ing) preferred
-- ✅ **Description**: Include ALL trigger keywords/phrases (max 1024 chars)
-- ✅ **Content**: Under 500 lines - use reference files for details
-- ✅ **Examples**: Real code examples
-- ✅ **Structure**: Clear headings, lists, code blocks
+- ✅ **Description**: Include ALL trigger keywords/phrases (max 1024 chars) - **can be in Chinese or English**
+- ✅ **Content**: Under 500 lines - use reference files for details - **MUST be in Chinese**
+- ✅ **Examples**: Real code examples - **comments in Chinese**
+- ✅ **Structure**: Clear headings, lists, code blocks - **headings in Chinese**
 
 ### Step 2: Add to skill-rules.json
 
@@ -182,12 +225,20 @@ Based on testing:
 
 ### Step 5: Follow Anthropic Best Practices
 
+✅ **Use Chinese (中文) for all content in SKILL.md** - Headings, descriptions, explanations, examples
 ✅ Keep SKILL.md under 500 lines
 ✅ Use progressive disclosure with reference files
 ✅ Add table of contents to reference files > 100 lines
-✅ Write detailed description with trigger keywords
+✅ Write detailed description with trigger keywords (can include Chinese keywords)
 ✅ Test with 3+ real scenarios before documenting
 ✅ Iterate based on actual usage
+
+**Language Guidelines:**
+- Headings: **Chinese** (如："目的"、"何时使用"、"关键信息")
+- Descriptions: **Chinese** (如："此技能帮助...")
+- Code comments: **Chinese** (如：`// 处理用户输入`)
+- Technical terms: Keep in English when standard (如：Express, Prisma, React)
+- Error messages: **Chinese** (如："⚠️ 阻止 - 需要遵循最佳实践")
 
 ---
 
@@ -270,14 +321,15 @@ export SKIP_ERROR_REMINDER=true
 
 When creating a new skill, verify:
 
+- [ ] **SKILL.md written in Chinese (中文)** - All headings, descriptions, examples, and explanations ⚠️
 - [ ] Skill file created in `.claude/skills/{name}/SKILL.md`
-- [ ] Proper frontmatter with name and description
-- [ ] Entry added to `skill-rules.json`
-- [ ] Keywords tested with real prompts
-- [ ] Intent patterns tested with variations
+- [ ] Proper frontmatter with name and description (description can be in Chinese or English)
+- [ ] Entry added to `skill-rules.json` with Chinese keywords support
+- [ ] Keywords tested with real prompts (including Chinese prompts)
+- [ ] Intent patterns tested with variations (including Chinese patterns)
 - [ ] File path patterns tested with actual files
 - [ ] Content patterns tested against file contents
-- [ ] Block message is clear and actionable (if guardrail)
+- [ ] Block message is clear and actionable in Chinese (if guardrail)
 - [ ] Skip conditions configured appropriately
 - [ ] Priority level matches importance
 - [ ] No false positives in testing
@@ -285,7 +337,7 @@ When creating a new skill, verify:
 - [ ] Performance is acceptable (<100ms or <200ms)
 - [ ] JSON syntax validated: `jq . skill-rules.json`
 - [ ] **SKILL.md under 500 lines** ⭐
-- [ ] Reference files created if needed
+- [ ] Reference files created if needed (also in Chinese)
 - [ ] Table of contents added to files > 100 lines
 
 ---
@@ -351,6 +403,14 @@ Complete guide for using skill-developer to create skills:
 - Best practices and common mistakes
 - Real-world examples in Chinese
 
+### [CHINESE_SKILL_TEMPLATE.md](CHINESE_SKILL_TEMPLATE.md)
+Complete Chinese skill template example:
+- Full SKILL.md structure in Chinese
+- Headings, descriptions, examples in Chinese
+- Code comments in Chinese
+- Error messages in Chinese
+- Comparison with English version
+
 ---
 
 ## Quick Reference Summary
@@ -386,11 +446,12 @@ See [TRIGGER_TYPES.md](TRIGGER_TYPES.md) for complete details.
 
 ### Anthropic Best Practices
 
+✅ **Language**: **MUST use Chinese (中文)** for all SKILL.md content
 ✅ **500-line rule**: Keep SKILL.md under 500 lines
 ✅ **Progressive disclosure**: Use reference files for details
 ✅ **Table of contents**: Add to reference files > 100 lines
 ✅ **One level deep**: Don't nest references deeply
-✅ **Rich descriptions**: Include all trigger keywords (max 1024 chars)
+✅ **Rich descriptions**: Include all trigger keywords (max 1024 chars) - can include Chinese keywords
 ✅ **Test first**: Build 3+ evaluations before extensive documentation
 ✅ **Gerund naming**: Prefer verb + -ing (e.g., "processing-pdfs")
 
