@@ -16,12 +16,23 @@
                     "skill rules",
                     "hook system",
                     "skill development",
-                    "skill-rules.json"
+                    "skill-rules.json",
+                    "技能",
+                    "创建技能",
+                    "添加技能",
+                    "技能系统",
+                    "技能触发",
+                    "技能规则",
+                    "技能开发",
+                    "hook系统"
                 ],
                 "intentPatterns": [
                     "(how do|how does|explain).*?skill",
                     "(create|add|modify|build).*?skill",
-                    "skill.*?(work|trigger|activate|system)"
+                    "skill.*?(work|trigger|activate|system)",
+                    "(如何|怎么|怎样).*?(创建|添加|修改).*?技能",
+                    "(创建|添加|修改|构建).*?技能",
+                    "技能.*?(系统|触发|激活|工作)"
                 ]
             }
         },
@@ -51,14 +62,37 @@
                     "BaseController",
                     "dependency injection",
                     "unifiedConfig",
-                    "configuration"
+                    "configuration",
+                    "后端",
+                    "后端开发",
+                    "微服务",
+                    "控制器",
+                    "服务",
+                    "仓库模式",
+                    "路由",
+                    "路由配置",
+                    "API接口",
+                    "端点",
+                    "中间件",
+                    "验证",
+                    "数据库访问",
+                    "依赖注入",
+                    "统一配置",
+                    "配置",
+                    "接口",
+                    "数据库"
                 ],
                 "intentPatterns": [
                     "(create|add|implement|build).*?(route|endpoint|API|controller|service|repository)",
                     "(fix|handle|debug).*?(error|exception|backend)",
                     "(add|implement).*?(middleware|validation|error.*?handling)",
                     "(organize|structure|refactor).*?(backend|service|API)",
-                    "(how to|best practice).*?(backend|route|controller|service)"
+                    "(how to|best practice).*?(backend|route|controller|service)",
+                    "(创建|添加|实现|开发).*?(路由|控制器|服务|接口|端点)",
+                    "(如何|怎么|怎样).*?(创建|实现|开发).*?(后端|路由|控制器|服务|接口)",
+                    "(修复|处理|调试).*?(错误|异常|问题|后端)",
+                    "(添加|实现).*?(中间件|验证|错误.*?处理)",
+                    "(组织|重构|结构化).*?(后端|服务|API|接口)"
                 ]
             },
             "fileTriggers": {
@@ -104,12 +138,28 @@
                     "Grid",
                     "styling",
                     "frontend",
-                    "React"
+                    "React",
+                    "组件",
+                    "React组件",
+                    "界面",
+                    "页面",
+                    "弹窗",
+                    "对话框",
+                    "表单",
+                    "前端",
+                    "前端开发",
+                    "样式",
+                    "样式设计",
+                    "布局",
+                    "Grid组件"
                 ],
                 "intentPatterns": [
                     "(create|add|make|build|update|modify|edit).*?(component|UI|page|modal|dialog|form)",
                     "(how to|best practice).*?(component|react|MUI)",
-                    "(style|design|layout).*?(component|UI)"
+                    "(style|design|layout).*?(component|UI)",
+                    "(创建|添加|构建|更新|修改|编辑).*?(组件|界面|页面|弹窗|对话框|表单)",
+                    "(如何|怎么|怎样).*?(创建|实现).*?(组件|React|MUI)",
+                    "(样式|设计|布局).*?(组件|界面)"
                 ]
             },
             "fileTriggers": {
@@ -163,12 +213,25 @@
                     "authenticated route",
                     "JWT testing",
                     "cookie auth",
-                    "test with auth"
+                    "test with auth",
+                    "测试路由",
+                    "测试接口",
+                    "测试API",
+                    "路由测试",
+                    "接口测试",
+                    "API测试",
+                    "认证路由",
+                    "JWT测试",
+                    "Cookie认证",
+                    "带认证的测试"
                 ],
                 "intentPatterns": [
                     "(test|debug|verify).*?(route|endpoint|API)",
                     "(how to|how do I).*?test.*?(route|endpoint|API)",
-                    "test.*?(authenticated|auth|JWT|cookie)"
+                    "test.*?(authenticated|auth|JWT|cookie)",
+                    "(测试|调试|验证).*?(路由|接口|API)",
+                    "(如何|怎么|怎样).*?测试.*?(路由|接口|API)",
+                    "测试.*?(认证|JWT|Cookie)"
                 ]
             },
             "fileTriggers": {
@@ -196,12 +259,22 @@
                     "error tracking",
                     "captureException",
                     "monitoring",
-                    "performance tracking"
+                    "performance tracking",
+                    "错误处理",
+                    "异常",
+                    "错误追踪",
+                    "性能监控",
+                    "监控",
+                    "追踪错误",
+                    "捕获异常"
                 ],
                 "intentPatterns": [
                     "(add|create|implement|setup).*?(error handling|sentry|error tracking)",
                     "(fix|handle|catch).*?(error|exception)",
-                    "(how to|best practice).*?(error|sentry|monitoring)"
+                    "(how to|best practice).*?(error|sentry|monitoring)",
+                    "(添加|创建|实现|设置).*?(错误处理|错误追踪|Sentry)",
+                    "(修复|处理|捕获).*?(错误|异常)",
+                    "(如何|怎么|怎样|最佳实践).*?(错误|Sentry|监控)"
                 ]
             },
             "fileTriggers": {
